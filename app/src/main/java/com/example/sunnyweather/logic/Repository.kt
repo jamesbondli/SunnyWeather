@@ -1,25 +1,25 @@
 package com.example.sunnyweather.logic
 
 import androidx.lifecycle.liveData
-import com.example.sunnyweather.logic.model.Place
-import com.example.sunnyweather.logic.network.SunnyWeatherWork
+import com.example.sunnyweather.logic.model.Lives
+import com.example.sunnyweather.logic.network.SunnyWeatherNetWork
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 import java.lang.RuntimeException
 
 object Repository {
 
-    fun searchPlaces(query: String) = liveData(Dispatchers.IO) {
+    fun searchPlaces(city: String) = liveData(Dispatchers.IO) {
         val result = try {
-            val placeResponse = SunnyWeatherWork.searchPlaces(query)
-            if (placeResponse.status == "ok") {
-                val places = placeResponse.places
-                Result.success(places)
+            val livesResponse = SunnyWeatherNetWork.searchPlaces(city)
+            if (livesResponse.status == "1") {
+                val lives = livesResponse.lives
+                Result.success(lives)
             } else {
-                Result.failure(RuntimeException("response status is ${placeResponse.status}"))
+                Result.failure(RuntimeException("response status is ${livesResponse.status}"))
             }
         } catch (e: Exception) {
-            Result.failure<List<Place>>(e)
+            Result.failure<List<Lives>>(e)
         }
         emit(result)
     }

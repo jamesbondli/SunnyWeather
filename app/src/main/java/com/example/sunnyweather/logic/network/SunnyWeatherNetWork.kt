@@ -7,10 +7,10 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-object SunnyWeatherWork {
-    private val placeService = ServiceCreator.create<PlaceService>()
+object SunnyWeatherNetWork {
+    private val livesService = ServiceCreator.create<LivesService>()
 
-    suspend fun searchPlaces(query: String) = placeService.searchPlaces(query).await()
+    suspend fun searchPlaces(city: String) = livesService.searchPlaces(city).await()
 
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->

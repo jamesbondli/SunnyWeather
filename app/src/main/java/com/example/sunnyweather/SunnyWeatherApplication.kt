@@ -9,7 +9,7 @@ class SunnyWeatherApplication : Application() {
     companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
-        const val TOKEN = "我的API令牌"
+        const val KEY = "9ad0e7e4d7f9d4a06c55adc79697d727"
     }
 
     override fun onCreate() {

@@ -1,21 +1,22 @@
 package com.example.sunnyweather.ui.place
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.sunnyweather.logic.Repository
-import com.example.sunnyweather.logic.model.Place
+import com.example.sunnyweather.logic.model.Lives
 
 class PlaceViewModel : ViewModel() {
     private val searchLiveData = MutableLiveData<String>()
 
-    val placeList = ArrayList<Place>()
+    val livesList = ArrayList<Lives>()
 
-    val placeLiveData = Transformations.switchMap(searchLiveData) { query ->
-        Repository.searchPlaces(query)
+    val livesLiveData = Transformations.switchMap(searchLiveData) { city ->
+        Repository.searchPlaces(city)
     }
 
-    fun searchPlaces(query: String) {
-        searchLiveData.value = query
+    fun searchPlaces(city: String) {
+        searchLiveData.value = city
     }
 }
